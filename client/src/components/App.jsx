@@ -1,7 +1,7 @@
 import React from 'react';
-import ProductList from './ProductList';
-import ProductViewer from './ProductViewer';
-import Search from './Search';
+import ProductList from './ProductList.jsx';
+import ProductViewer from './ProductViewer.jsx';
+import Search from './Search.jsx';
 
 import axios from 'axios';
 
@@ -9,13 +9,31 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-
+      products: [],
+      current: {}
     }
+    this.getProducts = this.getProducts.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    axios 
+      .get('/products')
+      .then((result) => this.setState({products: result.data}))
+      .catch(err => console.error(err))
 
   }
 
+  clickHandler(product) {
+    this.setState({ current: product }, () => console.log(this.state.current))
+  }
+
   render(){
-  
+
     return(
       <div>
         <div>
@@ -29,10 +47,10 @@ export default class App extends React.Component {
         </nav>
         <div className="row main-container">
           <div className="col-md-7 product-viewer-container">
-            <ProductViewer />
+            <ProductViewer current={this.state.current}/>
           </div>
           <div className="col-md-5 product-list-container">
-            <ProductList  />
+            <ProductList  products={this.state.products} clickHandler={this.clickHandler}/>
           </div>
         </div>
       </div>

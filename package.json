@@ -9,24 +9,25 @@
   },
   "repository": "https://github.com/atk1213/fullstack-mongo-mock",
   "license": "MIT",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
-    "bootstrap": "^4.3.1",
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "morgan": "^1.9.1",
-    "nodemon": "^1.18.10",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "mongoose": "^4.9.6"
-  },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.1",
+    "body-parser": "^1.17.0",
+    "cors": "^2.8.5",
+    "express": "^4.15.0",
+    "jquery": "^3.1.1",
+    "mongoose": "^4.9.6",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "request": "^2.81.0"
   }
 }

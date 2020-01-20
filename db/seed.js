@@ -32,8 +32,10 @@ const createProducts = () => {
 
 const insertMockData = function() {
   // Complete me please
-
+  Product.create(createProducts())
 };
+
+// insertMockData()
 
 // NOTE: DO NOT invoke this function as part of your
 // server code - it is meant to only be run once so that
