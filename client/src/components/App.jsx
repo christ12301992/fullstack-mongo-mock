@@ -10,7 +10,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       products: [],
-      current: {}
+      current: {},
+      clickToView: false
     }
     this.getProducts = this.getProducts.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -29,6 +30,7 @@ export default class App extends React.Component {
   }
 
   clickHandler(product) {
+    this.setState({ clickToView: true })
     this.setState({ current: product }, () => console.log(this.state.current))
   }
 
@@ -47,7 +49,7 @@ export default class App extends React.Component {
         </nav>
         <div className="row main-container">
           <div className="col-md-7 product-viewer-container">
-            <ProductViewer current={this.state.current}/>
+            { this.state.clickToView ? (<ProductViewer current={this.state.current}/>) : (<div/>) }
           </div>
           <div className="col-md-5 product-list-container">
             <ProductList  products={this.state.products} clickHandler={this.clickHandler}/>

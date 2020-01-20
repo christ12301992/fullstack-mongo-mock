@@ -23444,7 +23444,8 @@ var App = function (_React$Component) {
 
     _this.state = {
       products: [],
-      current: {}
+      current: {},
+      clickToView: false
     };
     _this.getProducts = _this.getProducts.bind(_this);
     _this.clickHandler = _this.clickHandler.bind(_this);
@@ -23472,6 +23473,7 @@ var App = function (_React$Component) {
     value: function clickHandler(product) {
       var _this3 = this;
 
+      this.setState({ clickToView: true });
       this.setState({ current: product }, function () {
         return console.log(_this3.state.current);
       });
@@ -23512,7 +23514,7 @@ var App = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'col-md-7 product-viewer-container' },
-            _react2.default.createElement(_ProductViewer2.default, { current: this.state.current })
+            this.state.clickToView ? _react2.default.createElement(_ProductViewer2.default, { current: this.state.current }) : _react2.default.createElement('div', null)
           ),
           _react2.default.createElement(
             'div',
@@ -24460,11 +24462,25 @@ var ProductViewer = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (ProductViewer.__proto__ || Object.getPrototypeOf(ProductViewer)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      currentBid: _this.props.current.curr_bid
+    };
+    _this.submitHandler = _this.submitHandler.bind(_this);
     return _this;
   }
 
   _createClass(ProductViewer, [{
+    key: 'submitHandler',
+    value: function submitHandler(event) {
+      event.preventDefault();
+      var inputVal = document.getElementById("newBid").value;
+      if (inputVal < this.state.currentBid) {
+        alert(inputVal + ' is not a valid bid, please input a valid price and submit again.');
+      } else {
+        alert('Thank you for your bid of $' + inputVal + '!');
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -24480,16 +24496,31 @@ var ProductViewer = function (_React$Component) {
           'div',
           { className: 'product-viewer-details' },
           _react2.default.createElement(
+            'span',
+            null,
+            '\xA0\xA0'
+          ),
+          _react2.default.createElement(
             'div',
             { style: { fontWeight: 'bold' } },
             'Current Bid: ',
             this.props.current.curr_bid
           ),
           _react2.default.createElement(
+            'span',
+            null,
+            '\xA0\xA0'
+          ),
+          _react2.default.createElement(
             'div',
             { style: { fontWeight: 'bold' } },
             'Original Posting Price: ',
             this.props.current.min_cost
+          ),
+          _react2.default.createElement(
+            'span',
+            null,
+            '\xA0\xA0'
           ),
           _react2.default.createElement(
             'div',
@@ -24499,13 +24530,18 @@ var ProductViewer = function (_React$Component) {
             ' day(s)'
           ),
           _react2.default.createElement(
-            'form',
+            'span',
             null,
+            '\xA0\xA0'
+          ),
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.submitHandler },
             _react2.default.createElement(
               'label',
               null,
               'New Bid:',
-              _react2.default.createElement('input', { type: 'text', name: 'name' })
+              _react2.default.createElement('input', { id: 'newBid', type: 'text', name: 'name' })
             ),
             _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
           )
