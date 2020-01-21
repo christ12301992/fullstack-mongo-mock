@@ -10,7 +10,11 @@ const controller = {
     })
   },
   post: (req, res) => {},
-  put: (req, res) => {},
+  put: (req, res) => {
+    helpers.updateProductHelper(req.params, req.body).then(() => {
+      res.status(202).send('updated')
+    })
+  },
   delete: (req, res) => {}
 }
 

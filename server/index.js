@@ -5,9 +5,20 @@
   const router = require('./router');
   const port = 3200;
   const server = express();
-  
-  server.use('/', express.static(path.join(__dirname + '/../client/dist')));
+  const bodyParser = require('body-parser');
+  const morgan = require('morgan');
+  const cors = require('cors');
+
+  server.use(bodyParser.json());
+  server.use(bodyParser.urlencoded({ extended: true }));
+
+  server.use(morgan('dev'));
+  server.use(cors());
+
   server.use('/', router);
+  server.use('/', express.static(path.join(__dirname + '/../client/dist')));
+
+
   // server.get('/name', (req, res) => {
   //   res.status(200).send('This is your get request, modify this file to use your router!')
   // })
